@@ -41,7 +41,7 @@ void GravityRtc::setup()
 void GravityRtc::read()
 {
 	readRtc();
-	processRtc();	
+	processRtc();
 }
 
 void GravityRtc::adjustRtc(const __FlashStringHelper* date, const __FlashStringHelper* time)
@@ -84,7 +84,7 @@ void GravityRtc::adjustRtc(uint16_t year,uint8_t month,uint8_t day,uint8_t week,
 	WriteTimeOn();
 
 	Wire.beginTransmission(RTC_Address);
-	Wire.write(char(0));//Set the address for writing       
+	Wire.write(char(0));//Set the address for writing
 	Wire.write(this->decTobcd(second));
 	Wire.write(this->decTobcd(minute));
 	Wire.write(this->decTobcd(hour + 80));      // +80: sets 24 hours format
@@ -95,7 +95,7 @@ void GravityRtc::adjustRtc(uint16_t year,uint8_t month,uint8_t day,uint8_t week,
 	Wire.endTransmission();
 
 	Wire.beginTransmission(RTC_Address);
-	Wire.write(0x12);   //Set the address for writing       
+	Wire.write(0x12);   //Set the address for writing
 	Wire.write(char(0));
 	Wire.endTransmission();
 
@@ -163,22 +163,22 @@ uint8_t GravityRtc::decTobcd(uint8_t num)
 void GravityRtc::WriteTimeOn(void)
 {
 	Wire.beginTransmission(RTC_Address);
-	Wire.write(0x10);//Set the address for writing as 10H       
-	Wire.write(0x80);//Set WRTC1=1      
+	Wire.write(0x10);//Set the address for writing as 10H
+	Wire.write(0x80);//Set WRTC1=1
 	Wire.endTransmission();
 
 	Wire.beginTransmission(RTC_Address);
-	Wire.write(0x0F);//Set the address for writing as OFH       
-	Wire.write(0x84);//Set WRTC2=1,WRTC3=1      
+	Wire.write(0x0F);//Set the address for writing as OFH
+	Wire.write(0x84);//Set WRTC2=1,WRTC3=1
 	Wire.endTransmission();
 }
 
 void GravityRtc::WriteTimeOff(void)
 {
 	Wire.beginTransmission(RTC_Address);
-	Wire.write(0x0F);   //Set the address for writing as OFH        
-	Wire.write(0);//Set WRTC2=0,WRTC3=0      
-	Wire.write(0);//Set WRTC1=0  
+	Wire.write(0x0F);   //Set the address for writing as OFH
+	Wire.write(0);//Set WRTC2=0,WRTC3=0
+	Wire.write(0);//Set WRTC1=0
 	Wire.endTransmission();
 }
 
@@ -224,5 +224,5 @@ uint8_t GravityRtc::dayOfTheWeek()
 //Serial.print(rtc.minute);
 //Serial.print("   Second = ");//second
 //Serial.print(rtc.second);
-//	
+//
 //Serial.println();
