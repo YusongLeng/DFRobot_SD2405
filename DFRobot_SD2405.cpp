@@ -1,5 +1,5 @@
 /*********************************************************************
-* GravityRtc.cpp
+* DFRobot_SD2405.cpp
 *
 * Copyright (C)    2017   [DFRobot](http://www.dfrobot.com),
 * GitHub Link :https://github.com/DFRobot/Gravity-I2C-SD2405-RTC-Module/
@@ -19,7 +19,7 @@
 * date    :  2017-04-18
 **********************************************************************/
 
-#include "GravityRtc.h"
+#include "DFRobot_SD2405.h"
 #include "Arduino.h"
 #include "Wire.h"
 
@@ -28,7 +28,7 @@ const uint8_t daysInMonth [] PROGMEM = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 // Function Name: setup()
 // Function Declaration: Initializing sensor
 //********************************************************************************************
-void GravityRtc::setup()
+void DFRobot_SD2405::setup()
 {
 	Wire.begin();
 }
@@ -38,13 +38,13 @@ void GravityRtc::setup()
 // Function Name: update()
 // Function Declaration: Update the sensor value
 //********************************************************************************************
-void GravityRtc::read()
+void DFRobot_SD2405::read()
 {
 	readRtc();
 	processRtc();
 }
 
-void GravityRtc::adjustRtc(const __FlashStringHelper* date, const __FlashStringHelper* time)
+void DFRobot_SD2405::adjustRtc(const __FlashStringHelper* date, const __FlashStringHelper* time)
 {
 	char buff[11];
     memcpy_P(buff, date, 11);
@@ -76,7 +76,7 @@ void GravityRtc::adjustRtc(const __FlashStringHelper* date, const __FlashStringH
 // Function Declaration: Initializing RTC Clock
 // adjustRtc(2017,6,19,1,12,7,0);  //Set Time: 2017/June/19th/Monday/12:07:0 am
 //********************************************************************************************
-void GravityRtc::adjustRtc(uint16_t year,uint8_t month,uint8_t day,uint8_t week,
+void DFRobot_SD2405::adjustRtc(uint16_t year,uint8_t month,uint8_t day,uint8_t week,
             	uint8_t hour,uint8_t minute,uint8_t second)
 {
 	if (year >= 2000)
@@ -107,7 +107,7 @@ void GravityRtc::adjustRtc(uint16_t year,uint8_t month,uint8_t day,uint8_t week,
 // Function Name: readRtc()
 // Function Declaration: Read RTC Time
 //********************************************************************************************
-void GravityRtc::readRtc()
+void DFRobot_SD2405::readRtc()
 {
 	unsigned char n = 0;
 
@@ -125,7 +125,7 @@ void GravityRtc::readRtc()
 // Function Name: processRtc()
 // Function Declaration: Analysis RTC Data from readRtc
 //********************************************************************************************
-void GravityRtc::processRtc()
+void DFRobot_SD2405::processRtc()
 {
 	unsigned char i;
 
@@ -154,13 +154,13 @@ void GravityRtc::processRtc()
 // Function Name: decTobcd()
 // Function Declaration: Decimal turn to BCD
 //********************************************************************************************
-uint8_t GravityRtc::decTobcd(uint8_t num)
+uint8_t DFRobot_SD2405::decTobcd(uint8_t num)
 {
 	return ((num / 10 * 16) + (num % 10));
 }
 
 
-void GravityRtc::WriteTimeOn(void)
+void DFRobot_SD2405::WriteTimeOn(void)
 {
 	Wire.beginTransmission(RTC_Address);
 	Wire.write(0x10);//Set the address for writing as 10H
@@ -173,7 +173,7 @@ void GravityRtc::WriteTimeOn(void)
 	Wire.endTransmission();
 }
 
-void GravityRtc::WriteTimeOff(void)
+void DFRobot_SD2405::WriteTimeOff(void)
 {
 	Wire.beginTransmission(RTC_Address);
 	Wire.write(0x0F);   //Set the address for writing as OFH
@@ -182,7 +182,7 @@ void GravityRtc::WriteTimeOff(void)
 	Wire.endTransmission();
 }
 
-uint8_t GravityRtc::conv2d(const char* p)
+uint8_t DFRobot_SD2405::conv2d(const char* p)
 {
 	uint8_t v = 0;
     if ('0' <= *p && *p <= '9')
@@ -190,7 +190,7 @@ uint8_t GravityRtc::conv2d(const char* p)
     return 10 * v + *++p - '0';
 }
 
-uint16_t GravityRtc::date2days(uint16_t y, uint8_t m, uint8_t d)
+uint16_t DFRobot_SD2405::date2days(uint16_t y, uint8_t m, uint8_t d)
 {
 	if (y >= 2000)
         y -= 2000;
@@ -202,7 +202,7 @@ uint16_t GravityRtc::date2days(uint16_t y, uint8_t m, uint8_t d)
     return days + 365 * y + (y + 3) / 4 - 1;
 }
 
-uint8_t GravityRtc::dayOfTheWeek()
+uint8_t DFRobot_SD2405::dayOfTheWeek()
 {
 	uint16_t day = date2days(this->year, this->month, this->day);
     return (day + 6) % 7; // Jan 1, 2000 is a Saturday, i.e. returns 6

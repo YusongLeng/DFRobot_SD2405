@@ -1,5 +1,5 @@
 /*********************************************************************
-* GravityRtc.h
+* DFRobot_SD2405.h
 *
 * Copyright (C)    2017   [DFRobot](http://www.dfrobot.com),
 * GitHub Link :https://github.com/DFRobot/Gravity-I2C-SD2405-RTC-Module/
@@ -25,11 +25,11 @@
 #define RTC_Address   0x32  //RTC_Address
 
 
-class GravityRtc
+class DFRobot_SD2405
 {
 public:
-	GravityRtc() {};
-	~GravityRtc() {};
+	DFRobot_SD2405() {};
+	~DFRobot_SD2405() {};
 
 public:
 	//Year Month Day Weekday Minute Second

@@ -4,8 +4,7 @@ Gravity I2C SD2405 RTC Module Respository, including library, sample code, Schem
 
 Contains the Following:
 
-* Arduino library: GravityRtc
-* Arduino library.zip: GravityRtc.zip
+* Arduino library: DFRobot_SD2405
 * Schematic.pdf: Gravity I2C SD2405 RTC Module Schematic.pdf
 * Layout.pdf: Gravity I2C SD2405 RTC Module Layout.pdf
 * Datasheet: SD2405AL datasheet.pdf
